@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { completeTask, deleteTask } from "../actions";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 const ListTask = () => {
-  const myState = useSelector((state) => state.ToAdd);
+  const myState = useSelector((store) => store.ToAdd);
   const dispatch = useDispatch();
   console.log(myState);
 
@@ -11,6 +11,7 @@ const ListTask = () => {
     if (state.completed) {
       return true;
     }
+    return false;
   });
   console.log(isComplete);
 
@@ -59,7 +60,7 @@ const ListTask = () => {
                               </tr>
                             ) : (
                               myState.map((state) => (
-                                <tr>
+                                <tr key={state.id}>
                                   <th scope="row">
                                     <input
                                       type="checkbox"
@@ -143,7 +144,7 @@ const ListTask = () => {
                               <tbody>
                                 {myState.map((state) =>
                                   state.completed ? (
-                                    <tr>
+                                    <tr key={state.id}>
                                       <td>{state?.text}</td>
                                       <td>
                                         <button

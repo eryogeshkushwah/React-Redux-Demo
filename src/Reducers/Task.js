@@ -1,8 +1,7 @@
 const initial = [];
 
-function nextTodoId(state) {
-  const maxId = state.reduce((maxId, state) => Math.max(state.id, maxId), -1);
-  return maxId + 1;
+function nextId(state) {
+ return state.length;
 }
 
 export const addToList = (state = initial, action) => {
@@ -11,7 +10,7 @@ export const addToList = (state = initial, action) => {
       return [
         ...state,
         {
-          id: nextTodoId(state),
+          id: nextId(state),
           text: action.payload,
           completed: false,
         },
@@ -20,15 +19,14 @@ export const addToList = (state = initial, action) => {
       return state.filter((list) => list.id !== action.payload);
 
     case "MARK_TASK_COMPLETED":
-      return state.map((todo) => {
-        if (todo.id !== action.payload) {
-          console.log(todo);
-          return todo;
+      return state.map((mystate) => {
+        if (mystate.id !== action.payload) {
+          return mystate;
         }
 
         return {
-          ...todo,
-          completed: !todo.completed,
+          ...mystate,
+          completed: !mystate.completed,
         };
       });
 

@@ -16,15 +16,3 @@ export const completeTask = (id) => {
     payload: id,
   };
 };
-
-export const setValue = () => {
-  return {
-    type: "SET_INPUT_VALUE",
-  };
-};
-
-export const clearValue = () => {
-  return {
-    type: "CLEAR_INPUT_VALUE",
-  };
-};
